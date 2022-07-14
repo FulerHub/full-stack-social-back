@@ -120,13 +120,11 @@ class AuthController {
                 }
             });
             if(user.avatar !== 'no-user.jpg'){
-
+                let avatarName = 'user'+req.user.id +Date.now()+ ".jpg";
+                file.mv(path.join(__dirname,'../uploads/') + avatarName);
+                user.avatar = avatarName;
+                await user.save();
             }
-            let avatarName = 'user'+req.user.id +Date.now()+ ".jpg"
-            file.mv(path.join(__dirname,'../uploads/') + avatarName)
-
-            user.avatar = avatarName;
-            await user.save();
             return res.json(user);
         } catch (e) {
             return res.status(400).json({message: 'Upload avatar error'})
