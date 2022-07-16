@@ -1,4 +1,4 @@
-const db = require('../models')
+const db = require('../models');
 const { Op } = require("sequelize");
 
 class PostsController  {
@@ -41,7 +41,7 @@ class PostsController  {
             if(posts === null) return res.status(403).json({ message: 'Wrong postID' })
             return res.status(200).json(posts)
         }catch (e) {
-            if(!e.statusCode) e.statusCode=500
+            if(!e.statusCode) e.statusCode=500;
             next(e);
         }
     }
@@ -69,11 +69,9 @@ class PostsController  {
                     attributes: ['id','name','avatar']
                 }
             });
-            //if(dialog === null) return res.status(403).json({ message: 'Wrong dialogID' })
-
             return res.status(200).json(findPost)
         }catch (e) {
-            if(!e.statusCode) e.statusCode=500
+            if(!e.statusCode) e.statusCode=500;
             next(e);
         }
     }
@@ -93,7 +91,7 @@ class PostsController  {
             await findPost.save();
             return res.status(200).json(findPost)
         }catch (e) {
-            if(!e.statusCode) e.statusCode=500
+            if(!e.statusCode) e.statusCode=500;
             next(e);
         }
     }
@@ -109,15 +107,15 @@ class PostsController  {
 
                 }
             });
-            if(findPost === null) return res.status(403).json({ message: 'Wrong postID' })
+            if(findPost === null) return res.status(403).json({ message: 'Wrong postID' });
             const deletePost = await db.Posts.destroy({
                 where:{
                     id:req.params.id,
                 }
-            })
-            return res.status(200).json(findPost)
+            });
+            return res.status(200).json(findPost);
         }catch (e) {
-            if(!e.statusCode) e.statusCode=500
+            if(!e.statusCode) e.statusCode=500;
             next(e);
         }
     }
